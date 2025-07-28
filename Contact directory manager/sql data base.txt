@@ -1,0 +1,27 @@
+
+CREATE TABLE contacts (
+    id NUMBER PRIMARY KEY,
+    name VARCHAR2(100) NOT NULL,
+    phone VARCHAR2(20) NOT NULL,
+    email VARCHAR2(100),
+    dob VARCHAR2(10) 
+);
+
+
+CREATE TABLE address (
+    id NUMBER PRIMARY KEY,
+    contact_id NUMBER,
+    street VARCHAR2(150),
+    city VARCHAR2(100),
+    pincode VARCHAR2(10),
+    CONSTRAINT fk_address_contact FOREIGN KEY (contact_id) REFERENCES contacts(id)
+);
+
+
+CREATE TABLE call_logs (
+    id NUMBER PRIMARY KEY,
+    contact_id NUMBER,
+    call_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    duration_minutes NUMBER,
+    CONSTRAINT fk_calllog_contact FOREIGN KEY (contact_id) REFERENCES contacts(id)
+);
